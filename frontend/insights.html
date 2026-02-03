@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Insights - Antigravity</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div class="container" style="max-width: 800px;">
+        <div class="card glass">
+            <header>
+                <h1>Feedback Insights</h1>
+                <p>Real-time analytics from our users.</p>
+            </header>
+
+            <div id="loadingStats" class="spinner-container">
+                <div class="spinner dark"></div>
+            </div>
+
+            <div id="statsContent" class="hidden">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Total Feedback</h3>
+                        <p class="stat-value" id="totalCount">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Average Rating</h3>
+                        <p class="stat-value" id="avgRating">0.0</p>
+                        <span class="stat-sub">/ 5.0</span>
+                    </div>
+                </div>
+
+                <div class="stat-section">
+                    <h3>Breakdown by Type</h3>
+                    <div class="type-bars" id="typeBars">
+                        <!-- Bars injected by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="btn-group centered" style="justify-content: center; margin-top: 40px;">
+                <a href="index.html" class="btn-primary"
+                    style="text-decoration: none; display: inline-block; width: auto; padding: 12px 24px;">Back to
+                    Form</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="insights.js"></script>
+</body>
+
+</html>
