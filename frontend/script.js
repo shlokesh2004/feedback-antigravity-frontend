@@ -138,18 +138,25 @@ document.addEventListener('DOMContentLoaded', () => {
             ? 'http://localhost:5000'
             : 'https://feedback-antigravity-backend-1.onrender.com';
 
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 15000);
+
         try {
+            console.log(`Submitting to: ${API_URL}/api/feedback`);
+            console.log('Submission data:', data);
+
             const response = await fetch(`${API_URL}/api/feedback`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
+                body: JSON.stringify(data),
+                signal: controller.signal
             });
 
+            clearTimeout(timeoutId);
             const result = await response.json();
 
             if (response.ok) {
                 showStatus('Feedback submitted successfully! Thank you.', 'success');
-                // Reset form and go back to step 1 after delay
                 setTimeout(() => {
                     form.reset();
                     showStep(0);
@@ -159,7 +166,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 throw new Error(result.message || 'Error submitting feedback.');
             }
         } catch (error) {
-            showStatus(error.message, 'error');
+            clearTimeout(timeoutId);
+            console.error('Submission error:', error);
+            if (error.name === 'AbortError') {
+                showStatus('Request timed out. The server might be waking up or your database is slow. Please try again.', 'error');
+            } else {
+                showStatus(error.message || 'An unexpected error occurred.', 'error');
+            }
         } finally {
             setLoading(false);
         }
