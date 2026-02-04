@@ -134,8 +134,12 @@ document.addEventListener('DOMContentLoaded', () => {
             rating: parseInt(getSelectedValue(inputs.ratingOps))
         };
 
+        const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+            ? 'http://localhost:5000'
+            : 'https://feedback-antigravity-backend.onrender.com'; // Placeholder, user will update this
+
         try {
-            const response = await fetch('http://localhost:5000/api/feedback', {
+            const response = await fetch(`${API_URL}/api/feedback`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
