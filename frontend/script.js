@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
             ? 'http://localhost:5000'
-            : 'https://feedback-antigravity-backend.onrender.com'; // Placeholder, user will update this
+            : 'https://feedback-antigravity-backend-1.onrender.com';
 
         try {
             const response = await fetch(`${API_URL}/api/feedback`, {
